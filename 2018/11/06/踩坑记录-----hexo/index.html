@@ -7,7 +7,7 @@
   <meta name="keyword" content="">
   <title>
     
-      踩坑记录-----npm篇 | Learning and memory
+      踩坑记录-----HEXO篇 | Learning and memory
     
   </title>
   <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
@@ -75,21 +75,20 @@
 </header>
 
     <div id="article-banner">
-  <h2>踩坑记录-----npm篇</h2>
+  <h2>踩坑记录-----HEXO篇</h2>
 </div>
 
 <main class="app-body">
   <article class="post-article">
     <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验，不会去ctrl+c/ctrl+v。愿看完本篇能减少更多的时间去搜索</p>
-<h2 id="NVM–node-version-manager"><a href="#NVM–node-version-manager" class="headerlink" title="NVM–node version manager"></a>NVM–node version manager</h2><p> <a href="https://github.com/coreybutler/nvm-windows/releases" target="_blank" rel="noopener">github NVM下载地址</a></p>
-<h3 id="建议使用nvm-noinstall-zip这种格式的，解压后可灵活放置所在位置"><a href="#建议使用nvm-noinstall-zip这种格式的，解压后可灵活放置所在位置" class="headerlink" title="建议使用nvm-noinstall.zip这种格式的，解压后可灵活放置所在位置"></a>建议使用nvm-noinstall.zip这种格式的，解压后可灵活放置所在位置</h3><h3 id="配置环境变量（这里假设会配置环境变量）"><a href="#配置环境变量（这里假设会配置环境变量）" class="headerlink" title="配置环境变量（这里假设会配置环境变量）"></a>配置环境变量（这里假设会配置环境变量）</h3><h3 id="验证是否可用"><a href="#验证是否可用" class="headerlink" title="验证是否可用"></a>验证是否可用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm --version</span><br></pre></td></tr></table></figure>
-<p>如图:<img src="https://upload-images.jianshu.io/upload_images/9989643-c02e5e0a20388757.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/981/format/webp" alt="NVM_VERSION" title="NVM_"></p>
-<h3 id="可以愉快的安装nodeJS了"><a href="#可以愉快的安装nodeJS了" class="headerlink" title="可以愉快的安装nodeJS了"></a>可以愉快的安装nodeJS了</h3><p>使用nvm install <version> [<arch>]命令下载需要的版本。arch参数表示系统位数，默认是64位，如果是32位操作系统，需要执行命令：nvm install 10.13.0 32，出现下图表示安装完成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install 10.13.0</span><br></pre></td></tr></table></figure></arch></version></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/9989643-1621e43a07b1180c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/879/format/webp" alt="安装nodeJS" title="安装nodeJS"></p>
-<h3 id="使用指定Node版本"><a href="#使用指定Node版本" class="headerlink" title="使用指定Node版本"></a>使用指定Node版本</h3><p>执行nvm use <version> [<arch>] 命令开始使用特定版本。比如：nvm use 10.13.0或者nvm use 10.13.0 32<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use 10.13.0</span><br></pre></td></tr></table></figure></arch></version></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/9989643-acade8e959fc6416.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/801/format/webp" alt="Generating"></p>
-<h3 id="NVM常用命令及含义"><a href="#NVM常用命令及含义" class="headerlink" title="NVM常用命令及含义"></a>NVM常用命令及含义</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm -v</span><br></pre></td></tr></table></figure>
-<p><img src="https://upload-images.jianshu.io/upload_images/9989643-e599ba54ae731cbf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/960/format/webp" alt="nvm_v" title="nvm常用命令"></p>
+<p>实践是检验真理的唯一标准！HEXO的实践感觉不懂开发也能完成~</p>
+<h1 id="用到的东西"><a href="#用到的东西" class="headerlink" title="用到的东西"></a>用到的东西</h1><h2 id="nodeJS"><a href="#nodeJS" class="headerlink" title="nodeJS"></a>nodeJS</h2><p>见NVM篇</p>
+<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p><a href="https://hexo.io/zh-cn/" title="hexo中文站" target="_blank" rel="noopener">hexo中文站</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
+<h2 id="生成SSH并添加到github"><a href="#生成SSH并添加到github" class="headerlink" title="生成SSH并添加到github"></a>生成SSH并添加到github</h2><p>这块的内容应该也要开个新坑–todo</p>
+<h2 id="更改hexo的-config-yml"><a href="#更改hexo的-config-yml" class="headerlink" title="更改hexo的_config.yml"></a>更改hexo的<code>_config.yml</code></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https://github.com/githubName/githubName.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<h2 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h2><p>这里使用的是hexo的deploy<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
+<p><code>hexo generate</code>是生成静态代码，放在项目的public目录<br>当然也可以现在本地预览更改<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure></p>
+<h2 id="利用github的gh-pages查看自己的线上blog"><a href="#利用github的gh-pages查看自己的线上blog" class="headerlink" title="利用github的gh-pages查看自己的线上blog"></a>利用github的gh-pages查看自己的线上blog</h2><p>在浏览器中输入<code>http://yourgithubname.github.io</code></p>
 </section>
     
     <p class="post-date" dir="">November 6, 2018</p>
@@ -103,7 +102,7 @@
       <script>
         var disqus_shortname = 'lassin';
         
-        var disqus_url = 'http://yoursite.com/2018/11/06/踩坑记录-----npm/';
+        var disqus_url = 'http://yoursite.com/2018/11/06/踩坑记录-----hexo/';
         
         (function(){
           var dsq = document.createElement('script');
@@ -124,7 +123,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/06/踩坑记录-----npm/';
+    var url = 'http://yoursite.com/2018/11/06/踩坑记录-----hexo/';
     $('#article-banner').geopattern(url)
     $('.header').removeClass('fixed-header')
 
