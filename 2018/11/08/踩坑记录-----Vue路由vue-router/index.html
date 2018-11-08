@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Royalty has no permanence">
+  <meta name="keyword" content="">
+  <title>
+    
+      踩坑记录-----VueRouter | Learning and memory
+    
+  </title>
+  <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <!-- <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script> -->
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-104099189-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <!-- <span>Learning and memory</span> -->
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          <!-- <div class="tooltip"> -->
+            <!-- <span class="tooltiptext">👨🏻‍💻</span> -->
+
+            
+            <a href="/about/" class="item-link">👨🏻‍💻</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">👨🏻‍💻</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>踩坑记录-----VueRouter</h2>
+</div>
+
+<main class="app-body">
+  <article class="post-article">
+    <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验，不会去ctrl+c/ctrl+v。愿看完本篇能减少更多的时间去搜索</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuej-router --save</span><br></pre></td></tr></table></figure>
+<h2 id="引入并Vue-use-VueRouter"><a href="#引入并Vue-use-VueRouter" class="headerlink" title="引入并Vue.use(VueRouter)"></a>引入并Vue.use(VueRouter)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(main.js)</span><br><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import VueRouter from &apos;vue-router&apos;;</span><br><span class="line">Vue.use(VueRouter);</span><br></pre></td></tr></table></figure>
+<h2 id="配置路由"><a href="#配置路由" class="headerlink" title="配置路由"></a>配置路由</h2><p>1.创建组件，引入组件<br>2.定义路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const routes = [</span><br><span class="line">    &#123;path:&apos;/foo&apos;,component:Foo&#125;</span><br><span class="line">    &#123;path:&apos;/bar&apos;,component:Bar&#125;</span><br><span class="line">    </span><br><span class="line">     &#123;path:&apos;*&apos;,redirect:&apos;/foo&apos;&#125; //默认跳转路由</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>3.实例化VueRouter<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">    routes:routes</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>4.挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">    el:&apos;#app&apos;,</span><br><span class="line">    router,</span><br><span class="line">    render:h=&gt;h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>5.<router-view></router-view>放在App.vue</p>
+<p>6.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;router-link to=&apos;/Home&apos;&gt;首页&lt;router-link&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h2><p>1.配置动态路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(main.js)</span><br><span class="line">const routes = [</span><br><span class="line">    &lt;!-- &#123;path:&apos;/foo&apos;,component:Foo&#125;</span><br><span class="line">    &#123;path:&apos;/bar&apos;,component:Bar&#125;</span><br><span class="line">    &#123;path:&apos;*&apos;,redirect:&apos;/foo&apos;&#125; //默认跳转路由 --&gt;</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">        path:&apos;/use/:id&apos;,component:User</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<h3 id=""><a href="#" class="headerlink" title=""></a><router-link to="'/Home/'+key"><router-link></router-link></router-link></h3><p>2.在对应页面获取动态路由的值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">mounted:&#123;</span><br><span class="line">     this.$route.params </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Get传值"><a href="#Get传值" class="headerlink" title="Get传值"></a>Get传值</h2><h3 id="-1"><a href="#-1" class="headerlink" title=""></a><router-link to="'/Home?id'+keu"><router-link></router-link></router-link></h3><p>1.配置路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(main.js)</span><br><span class="line">const routes = [    </span><br><span class="line">    &#123;</span><br><span class="line">        path:&apos;news&apos;,component:News</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>2.获取get传值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mounted:&#123;</span><br><span class="line">    this.$route.query</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="路由的嵌套"><a href="#路由的嵌套" class="headerlink" title="路由的嵌套"></a>路由的嵌套</h2><p>1.配置路由<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(main.js)</span><br><span class="line">const routes = [    </span><br><span class="line">    &#123;</span><br><span class="line">        path:&apos;news&apos;,</span><br><span class="line">        component:News，</span><br><span class="line">        children:[</span><br><span class="line">            &#123;path:&apos;newsAdd&apos;,component:NewsAdd&#125;,</span><br><span class="line">            &#123;path:&apos;newsList&apos;,component:NewsList&#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p>2.父路由里面配置子路由显示的地方<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;router-link to=&quot;&apos;/news/newsAdd&quot;&gt;添加新闻&lt;router-link&gt;</span><br><span class="line">        &lt;router-link to=&quot;&apos;/news/newsList&quot;&gt;新闻列表&lt;router-link&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">    &lt;div &gt;</span><br><span class="line">        &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="beforeDestroy"><a href="#beforeDestroy" class="headerlink" title="beforeDestroy"></a>beforeDestroy</h2><h2 id="destroy"><a href="#destroy" class="headerlink" title="destroy"></a>destroy</h2></section>
+    
+    <p class="post-date" dir="">November 8, 2018</p>
+
+    
+
+
+    
+      <section id="comments">
+        
+      <script>
+        var disqus_shortname = 'lassin';
+        
+        var disqus_url = 'http://yoursite.com/2018/11/08/踩坑记录-----Vue路由vue-router/';
+        
+        (function(){
+          var dsq = document.createElement('script');
+          dsq.type = 'text/javascript';
+          dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+    
+  </article>
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2018/11/08/踩坑记录-----Vue路由vue-router/';
+    $('#article-banner').geopattern(url)
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png') 
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      var imageW = $(this).width()
+      var imageH = $(this).height()
+      
+      var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+      zoom = zoom < 1 ? 1 : zoom
+      zoom = zoom > 2 ? 2 : zoom
+      var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+      $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+      $('.image-view-wrap').addClass('wrap-active')
+      $('.image-view-wrap img').css({
+        'width': `${imageW}`,
+        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+      })
+      $('html').css('overflow', 'hidden')
+
+      $('.image-view-wrap').on('click', function() {
+        $(this).remove()
+        $('html').attr('style', '')
+      })
+    })
+
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2018 | 个人博客 
+           <a href="https://hexo.io" target="_blank">HEXO</a>
+    <br>
+    <a href="https://github.com/lassin/">lassin</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine == 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
