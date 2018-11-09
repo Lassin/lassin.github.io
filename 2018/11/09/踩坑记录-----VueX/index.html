@@ -7,7 +7,7 @@
   <meta name="keyword" content="">
   <title>
     
-      踩坑记录-----Vue请求数据axios | Learning and memory
+      踩坑记录-----VueX | Learning and memory
     
   </title>
   <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
@@ -75,17 +75,24 @@
 </header>
 
     <div id="article-banner">
-  <h2>踩坑记录-----Vue请求数据axios</h2>
+  <h2>踩坑记录-----VueX</h2>
 </div>
 
 <main class="app-body">
   <article class="post-article">
-    <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验。愿看完本篇能减少更多的时间去搜索</p>
-<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install axios --save</span><br><span class="line">bower install axios</span><br><span class="line">&lt;script src=&quot;https://unpkg.com/axios/dist/axios.min.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="直接引入"><a href="#直接引入" class="headerlink" title="直接引入"></a>直接引入</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">const axios = require(&apos;axios&apos;);</span><br><span class="line"></span><br><span class="line">// Make a request for a user with a given ID</span><br><span class="line">axios.get(&apos;/user?ID=12345&apos;)</span><br><span class="line">.then(function (response) &#123;</span><br><span class="line">  // handle success</span><br><span class="line">  console.log(response);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(function (error) &#123;</span><br><span class="line">  // handle error</span><br><span class="line">  console.log(error);</span><br><span class="line">&#125;)</span><br><span class="line">.then(function () &#123;</span><br><span class="line">  // always executed</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">// Optionally the request above could also be done as</span><br><span class="line">axios.get(&apos;/user&apos;, &#123;</span><br><span class="line">  params: &#123;</span><br><span class="line">    ID: 12345</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">.then(function (response) &#123;</span><br><span class="line">  console.log(response);</span><br><span class="line">&#125;)</span><br><span class="line">.catch(function (error) &#123;</span><br><span class="line">  console.log(error);</span><br><span class="line">&#125;)</span><br><span class="line">.then(function () &#123;</span><br><span class="line">  // always executed</span><br><span class="line">&#125;);  </span><br><span class="line"></span><br><span class="line">// Want to use async/await? Add the `async` keyword to your outer function/method.</span><br><span class="line">async function getUser() &#123;</span><br><span class="line">try &#123;</span><br><span class="line">  const response = await axios.get(&apos;/user?ID=12345&apos;);</span><br><span class="line">  console.log(response);</span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">  console.error(error);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</section>
+    <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验，不会去ctrl+c/ctrl+v。愿看完本篇能减少更多的时间去搜索</p>
+<h2 id="不同组举荐的数据共享、数据持久化"><a href="#不同组举荐的数据共享、数据持久化" class="headerlink" title="不同组举荐的数据共享、数据持久化"></a>不同组举荐的数据共享、数据持久化</h2><p>1.安装vuex<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure></p>
+<p>2.src目录下新建vuex文件夹<br>3.vuex文件夹里新建store.js<br>4.在store.js里引入vue、vuex，并且use vuex<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import Vuex from &apos;vuex&apos;;</span><br><span class="line">Vue use(Vuex);</span><br></pre></td></tr></table></figure></p>
+<p>5.定义数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//state在vuex中用于存储数据</span><br><span class="line">var state = &#123;</span><br><span class="line">    count:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>6.定义方法 mutations里面放的是方法，主要用于改变state里面放的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var mutations=&#123;</span><br><span class="line">    inCount()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="暴露"><a href="#暴露" class="headerlink" title="暴露"></a>暴露</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const store = new Vuex.store(&#123;</span><br><span class="line">    state,</span><br><span class="line">    mutations</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">export default store;</span><br></pre></td></tr></table></figure>
+<h2 id="组件里使用vuex"><a href="#组件里使用vuex" class="headerlink" title="组件里使用vuex"></a>组件里使用vuex</h2><p>1.引入 store<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import store from &apos;../vuex/store.js&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>2.注册<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">export default&#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">        return&#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    store,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        inCount()&#123;</span><br><span class="line">            this.$store.commit(&apos;inCount&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.获取state里面的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.state.数据</span><br></pre></td></tr></table></figure></p>
+<p>4.触发mutations改变state里的数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$store.commit(&apos;inCount&apos;);</span><br></pre></td></tr></table></figure></section>
     
-    <p class="post-date" dir="">November 8, 2018</p>
+    <p class="post-date" dir="">November 9, 2018</p>
 
     
 
@@ -96,7 +103,7 @@
       <script>
         var disqus_shortname = 'lassin';
         
-        var disqus_url = 'http://yoursite.com/2018/11/08/踩坑记录-----Vue请求数据axios/';
+        var disqus_url = 'http://yoursite.com/2018/11/09/踩坑记录-----VueX/';
         
         (function(){
           var dsq = document.createElement('script');
@@ -117,7 +124,7 @@
 
 <script>
   (function () {
-    var url = 'http://yoursite.com/2018/11/08/踩坑记录-----Vue请求数据axios/';
+    var url = 'http://yoursite.com/2018/11/09/踩坑记录-----VueX/';
     $('#article-banner').geopattern(url)
     $('.header').removeClass('fixed-header')
 
