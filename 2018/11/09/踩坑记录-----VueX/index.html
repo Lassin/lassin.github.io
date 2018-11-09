@@ -80,7 +80,7 @@
 
 <main class="app-body">
   <article class="post-article">
-    <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验，不会去ctrl+c/ctrl+v。愿看完本篇能减少更多的时间去搜索</p>
+    <section class="markdown-content" dir=""><p>记录自己的一些踩坑经验。愿看完本篇能减少更多的时间去搜索</p>
 <h2 id="不同组举荐的数据共享、数据持久化"><a href="#不同组举荐的数据共享、数据持久化" class="headerlink" title="不同组举荐的数据共享、数据持久化"></a>不同组举荐的数据共享、数据持久化</h2><p>1.安装vuex<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vuex --save</span><br></pre></td></tr></table></figure></p>
 <p>2.src目录下新建vuex文件夹<br>3.vuex文件夹里新建store.js<br>4.在store.js里引入vue、vuex，并且use vuex<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &apos;vue&apos;;</span><br><span class="line">import Vuex from &apos;vuex&apos;;</span><br><span class="line">Vue use(Vuex);</span><br></pre></td></tr></table></figure></p>
 <p>5.定义数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//state在vuex中用于存储数据</span><br><span class="line">var state = &#123;</span><br><span class="line">    count:1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
