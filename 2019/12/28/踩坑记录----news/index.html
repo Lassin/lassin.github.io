@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="Royalty has no permanence">
+  <meta name="keyword" content="">
+  <title>
+    
+      踩坑记录-----摘文缓存 | Learning and memory
+    
+  </title>
+  <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+
+  <link href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdn.bootcss.com/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <!-- <script src="/js/qrious.js"></script>
+<script src="/js/gitment.js"></script> -->
+
+  
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-104099189-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+
+</head>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <!-- <span>Learning and memory</span> -->
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          <!-- <div class="tooltip"> -->
+            <!-- <span class="tooltiptext">👨🏻‍💻</span> -->
+
+            
+            <a href="/about/" class="item-link">👨🏻‍💻</a>
+          
+        </li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">👨🏻‍💻</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>踩坑记录-----摘文缓存</h2>
+</div>
+
+<main class="app-body">
+  <article class="post-article">
+    <section class="markdown-content" dir=""><p>愿看完本篇能减少更多的时间去搜索<br>摘自<a href="http://www.cnblogs.com/lyzg/p/5125934.html?f=t" target="_blank" rel="noopener">流云诸葛</a></p>
+<ol>
+<li>浏览器缓存基本认识</li>
+<li>强缓存的原理</li>
+<li>强缓存的管理</li>
+<li>强缓存的应用</li>
+<li>协商缓存的原理</li>
+<li>协商缓存的管理</li>
+<li><p>浏览器行为对缓存的影响</p>
+</li>
+<li><p>浏览器缓存基本认识<br>它分为强缓存和协商缓存：<br>1）浏览器在加载资源时，先根据这个资源的一些http header判断它是否命中强缓存，强缓存如果命中，浏览器直接从自己的缓存中读取资源，不会发请求到服务器。比如某个css文件，如果浏览器在加载它所在的网页时，这个css文件的缓存配置命中了强缓存，浏览器就直接从缓存中加载这个css，连请求都不会发送到网页所在服务器；</p>
+</li>
+</ol>
+<p>2）当强缓存没有命中的时候，浏览器一定会发送一个请求到服务器，通过服务器端依据资源的另外一些http header验证这个资源是否命中协商缓存，如果协商缓存命中，服务器会将这个请求返回，但是不会返回这个资源的数据，而是告诉客户端可以直接从缓存中加载这个资源，于是浏览器就又会从自己的缓存中去加载这个资源；</p>
+<p>3）强缓存与协商缓存的共同点是：如果命中，都是从客户端缓存中加载资源，而不是从服务器加载资源数据；区别是：强缓存不发请求到服务器，协商缓存会发请求到服务器。</p>
+<p>4）当协商缓存也没有命中的时候，浏览器直接从服务器加载资源数据。</p>
+<ol start="2">
+<li>强缓存的原理<br>当浏览器对某个资源的请求命中了强缓存时，返回的http状态为200，在chrome的开发者工具的network里面size会显示为from cache，比如京东的首页里就有很多静态资源配置了强缓存，用chrome打开几次，再用f12查看network，可以看到有不少请求就是从缓存中加载的：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160113231738194-680168496.png" alt="请求"><br>强缓存是利用Expires或者Cache-Control这两个http response header实现的，它们都用来表示资源在客户端缓存的有效期。</li>
+</ol>
+<p>Expires是http1.0提出的一个表示资源过期时间的header，它描述的是一个绝对时间，由服务器返回，用GMT格式的字符串表示，如：Expires:Thu, 31 Dec 2037 23:55:55 GMT，它的缓存原理是：</p>
+<p>1）浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在respone的header加上Expires的header，如：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160113231739069-2137551345.png" alt="请求2"><br>2）浏览器在接收到这个资源后，会把这个资源连同所有response header一起缓存下来（所以缓存命中的请求返回的header并不是来自服务器，而是来自之前缓存的header）；</p>
+<p>3）浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，拿出它的Expires跟当前的请求时间比较，如果请求时间在Expires指定的时间之前，就能命中缓存，否则就不行。</p>
+<p>4）如果缓存没有命中，浏览器直接从服务器加载资源时，Expires Header在重新加载的时候会被更新。</p>
+<p>Expires是较老的强缓存管理header，由于它是服务器返回的一个绝对时间，在服务器时间与客户端时间相差较大时，缓存管理容易出现问题，比如随意修改下客户端时间，就能影响缓存命中的结果。所以在http1.1的时候，提出了一个新的header，就是Cache-Control，这是一个相对时间，在配置缓存的时候，以秒为单位，用数值表示，如：Cache-Control:max-age=315360000，它的缓存原理是：</p>
+<p>1）浏览器第一次跟服务器请求一个资源，服务器在返回这个资源的同时，在respone的header加上Cache-Control的header，如：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160114150736335-1224902285.png" alt="请求"><br>2）浏览器在接收到这个资源后，会把这个资源连同所有response header一起缓存下来；</p>
+<p>3）浏览器再请求这个资源时，先从缓存中寻找，找到这个资源后，根据它第一次的请求时间和Cache-Control设定的有效期，计算出一个资源过期时间，再拿这个过期时间跟当前的请求时间比较，如果请求时间在过期时间之前，就能命中缓存，否则就不行。</p>
+<p>4）如果缓存没有命中，浏览器直接从服务器加载资源时，Cache-Control Header在重新加载的时候会被更新。</p>
+<p>Cache-Control描述的是一个相对时间，在进行缓存命中的时候，都是利用客户端时间进行判断，所以相比较Expires，Cache-Control的缓存管理更有效，安全一些。</p>
+<p>这两个header可以只启用一个，也可以同时启用，当response header中，Expires和Cache-Control同时存在时，Cache-Control优先级高于Expires：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160114213430210-470510830.png" alt="请求"></p>
+<ol start="3">
+<li>强缓存的管理<br>前面介绍的是强缓存的原理，在实际应用中我们会碰到需要强缓存的场景和不需要强缓存的场景，通常有2种方式来设置是否启用强缓存：</li>
+</ol>
+<p>1）通过代码的方式，在web服务器返回的响应中添加Expires和Cache-Control Header；</p>
+<p>2）通过配置web服务器的方式，让web服务器在响应资源的时候统一添加Expires和Cache-Control Header。</p>
+<p>比如在javaweb里面，我们可以使用类似下面的代码设置强缓存：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">java.util.Date date = new java.util.Date();    </span><br><span class="line">response.setDateHeader(&quot;Expires&quot;,date.getTime()+20000); //Expires:过时期限值 </span><br><span class="line">response.setHeader(&quot;Cache-Control&quot;, &quot;public&quot;); //Cache-Control来控制页面的缓存与否,public:浏览器和缓存服务器都可以缓存页面信息；</span><br><span class="line">response.setHeader(&quot;Pragma&quot;, &quot;Pragma&quot;); //Pragma:设置页面是否缓存，为Pragma则缓存，no-cache则不缓存</span><br></pre></td></tr></table></figure></p>
+<p>还可以通过类似下面的java代码设置不启用强缓存：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">response.setHeader( &quot;Pragma&quot;, &quot;no-cache&quot; );   </span><br><span class="line">response.setDateHeader(&quot;Expires&quot;, 0);   </span><br><span class="line">response.addHeader( &quot;Cache-Control&quot;, &quot;no-cache&quot; );//浏览器和缓存服务器都不应该缓存页面信息</span><br></pre></td></tr></table></figure></p>
+<p>tomcat还提供了一个ExpiresFilter专门用来配置强缓存，具体使用的方式可参考tomcat的官方文档：<a href="http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#Expires_Filter" target="_blank" rel="noopener">http://tomcat.apache.org/tomcat-7.0-doc/config/filter.html#Expires_Filter</a></p>
+<p>nginx和apache作为专业的web服务器，都有专门的配置文件，可以配置expires和cache-control，这方面的知识，如果你对运维感兴趣的话，可以在百度上搜索“nginx 设置 expires cache-control”或“apache 设置 expires cache-control”都能找到不少相关的文章。</p>
+<p>由于在开发的时候不会专门去配置强缓存，而浏览器又默认会缓存图片，css和js等静态资源，所以开发环境下经常会因为强缓存导致资源没有及时更新而看不到最新的效果，解决这个问题的方法有很多，常用的有以下几种：</p>
+<p>1）直接ctrl+f5，这个办法能解决页面直接引用的资源更新的问题；</p>
+<p>2）使用浏览器的隐私模式开发；</p>
+<p>3）如果用的是chrome，可以f12在network那里把缓存给禁掉（这是个非常有效的方法）：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160114213431194-1644478133.png" alt="请求"><br>4）在开发阶段，给资源加上一个动态的参数，如css/index.css?v=0.0001，由于每次资源的修改都要更新引用的位置，同时修改参数的值，所以操作起来不是很方便，除非你是在动态页面比如jsp里开发就可以用服务器变量来解决（v=${sysRnd}），或者你能用一些前端的构建工具来处理这个参数修改的问题；</p>
+<p>5）如果资源引用的页面，被嵌入到了一个iframe里面，可以在iframe的区域右键单击重新加载该页面，以chrome为例：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160114213431928-735593562.png" alt="请求"><br>6）如果缓存问题出现在ajax请求中，最有效的解决办法就是ajax的请求地址追加随机数；</p>
+<p>7）还有一种情况就是动态设置iframe的src时，有可能也会因为缓存问题，导致看不到最新的效果，这时候在要设置的src后面添加随机数也能解决问题；</p>
+<p>8）如果你用的是grunt和gulp这种前端工具开发，通过它们的插件比如grunt-contrib-connect来启动一个静态服务器，则完全不用担心开发阶段的资源更新问题，因为在这个静态服务器下的所有资源返回的respone header中，cache-control始终被设置为不缓存：<br><img src="https://images2015.cnblogs.com/blog/459873/201601/459873-20160114213432772-1414312016.png" alt="请求"></p>
+</section>
+    
+    <p class="post-date" dir="">December 28, 2019</p>
+
+    
+
+
+    
+      <section id="comments">
+        
+      <script>
+        var disqus_shortname = 'lassin';
+        
+        var disqus_url = 'http://yoursite.com/2019/12/28/踩坑记录----news/';
+        
+        (function(){
+          var dsq = document.createElement('script');
+          dsq.type = 'text/javascript';
+          dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+      </script>
+    
+        <div id="disqus_thread">
+          <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        </div>
+      </section>
+    
+  </article>
+</main>
+
+<script>
+  (function () {
+    var url = 'http://yoursite.com/2019/12/28/踩坑记录----news/';
+    $('#article-banner').geopattern(url)
+    $('.header').removeClass('fixed-header')
+
+     // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', 'http://file.muyutech.com/error-img.png') 
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      var imageW = $(this).width()
+      var imageH = $(this).height()
+      
+      var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+      zoom = zoom < 1 ? 1 : zoom
+      zoom = zoom > 2 ? 2 : zoom
+      var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+      $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+      $('.image-view-wrap').addClass('wrap-active')
+      $('.image-view-wrap img').css({
+        'width': `${imageW}`,
+        'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+      })
+      $('html').css('overflow', 'hidden')
+
+      $('.image-view-wrap').on('click', function() {
+        $(this).remove()
+        $('html').attr('style', '')
+      })
+    })
+
+  })();
+</script>
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2019 | 个人博客 
+           <a href="https://hexo.io" target="_blank">HEXO</a>
+    <br>
+    <a href="https://github.com/lassin/">lassin</a>
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine == 'false') {
+        figure.find('.gutter').hide();
+      }
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+<script src="/js/script.js"></script>
+
+  </body>
+</html>
